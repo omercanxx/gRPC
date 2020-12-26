@@ -33,9 +33,8 @@ message TimeReply {
 }
 
 message GameRequest{
- string message = 1;
 }
 
 message GameReply{
- string message = 1;
+ string number = 1;
 }

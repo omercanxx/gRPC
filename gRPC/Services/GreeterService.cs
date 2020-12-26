@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
 using Grpc.Core;
@@ -34,35 +35,16 @@ namespace gRPC
                 Year = "Year: " + year,
             });
         }
-        public override Task<GameReply> PlayGame(GameRequest request, ServerCallContext context)
+        public async override Task<GameReply> PlayGame(GameRequest request, ServerCallContext context)
         {
             Random r = new Random();
             int rInt = r.Next(0, 100);
-
-            Console.WriteLine(rInt);
-            if (Convert.ToInt32(request.Message) > rInt)
+            return await Task.FromResult(new GameReply
             {
-                return Task.FromResult(new GameReply
-                {
-                    Message = "GTH"
-                });
-
-            }
-            else if (Convert.ToInt32(request.Message) < rInt)
-            {
-                return Task.FromResult(new GameReply
-                {
-                    Message = "LTH"
-                });
-            }
-            else
-            {
-                return Task.FromResult(new GameReply
-                {
-                    Message = "WIN"
-                });
-            }
-
+                Number = rInt.ToString()
+            });
         }
+
     }
 }
+

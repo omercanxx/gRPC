@@ -13,13 +13,15 @@ namespace ConsoleApp
             var channel = GrpcChannel.ForAddress("https://localhost:5001");
 
             var client = new Greeter.GreeterClient(channel);
-            
+            string name = args[1];
+            string surname = args[2];
+
 
             var response = await client.SayHelloAsync(
                 new HelloRequest
                 {
-                    Name = "Ömer Can",
-                    Surname = "Sucu"
+                    Name = name,
+                    Surname = surname
                 });
             Console.WriteLine("From Server: " + response.Message);
             Console.WriteLine("1 - Get Time");
@@ -30,28 +32,47 @@ namespace ConsoleApp
                 case 1:
                     var responseSwitch = await client.GetTimeAsync(
                         new TimeRequest { });
-                    Console.WriteLine("Time:" + responseSwitch.Year+ "//" + responseSwitch.Month + "//" + responseSwitch.Day);
+                    Console.WriteLine("Time:" + responseSwitch.Year + "//" + responseSwitch.Month + "//" + responseSwitch.Day);
                     break;
                 case 2:
+                    int count = 0;
+                    var responseSwitchGame = await client.PlayGameAsync(
+                    new GameRequest { });
+                    string msg = responseSwitchGame.Number;
                     while (true)
                     {
+                        if (count == 5)
+                        {
+                            Console.WriteLine("LOSE");
+                            Console.WriteLine("Number was " + msg);
+                            break;
+                        }
                         Console.WriteLine("Enter a number");
                         string number = Console.ReadLine();
-                        var responseSwitch2 = await client.PlayGameAsync(
-                            new GameRequest
-                            {
-                                Message = number
-                            }
-                        );
-                        string msg = responseSwitch2.Message;
-                        Console.WriteLine(msg);
-                        if(msg == "WIN")
+                        if (Int32.Parse(msg) > Int32.Parse(number) && count < 5)
                         {
+                            count++;
+                            Console.WriteLine("LTH");
+                        }
+                        else if (Int32.Parse(msg) < Int32.Parse(number) && count < 5)
+                        {
+                            count++;
+                            Console.WriteLine("GTH");
+                        }
+                        else if (Int32.Parse(msg) == Int32.Parse(number) && count < 5)
+                        {
+                            Console.WriteLine("WIN");
                             break;
+                        }
+
+                        else
+                        {
+                            count++;
+                            Console.WriteLine("ERR");
                         }
                     }
                     break;
-                    
+
             }
             Console.ReadKey();
         }

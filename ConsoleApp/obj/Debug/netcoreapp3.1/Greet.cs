@@ -28,12 +28,12 @@ namespace gRPC {
             "ASABKAkSDwoHc3VybmFtZRgCIAEoCSIdCgpIZWxsb1JlcGx5Eg8KB21lc3Nh",
             "Z2UYASABKAkiHgoLVGltZVJlcXVlc3QSDwoHbWVzc2FnZRgBIAEoCSI1CglU",
             "aW1lUmVwbHkSCwoDZGF5GAEgASgJEg0KBW1vbnRoGAIgASgJEgwKBHllYXIY",
-            "AyABKAkiHgoLR2FtZVJlcXVlc3QSDwoHbWVzc2FnZRgBIAEoCSIcCglHYW1l",
-            "UmVwbHkSDwoHbWVzc2FnZRgBIAEoCTKgAQoHR3JlZXRlchIyCghTYXlIZWxs",
-            "bxITLmdyZWV0LkhlbGxvUmVxdWVzdBoRLmdyZWV0LkhlbGxvUmVwbHkSLwoH",
-            "R2V0VGltZRISLmdyZWV0LlRpbWVSZXF1ZXN0GhAuZ3JlZXQuVGltZVJlcGx5",
-            "EjAKCFBsYXlHYW1lEhIuZ3JlZXQuR2FtZVJlcXVlc3QaEC5ncmVldC5HYW1l",
-            "UmVwbHlCB6oCBGdSUENiBnByb3RvMw=="));
+            "AyABKAkiDQoLR2FtZVJlcXVlc3QiGwoJR2FtZVJlcGx5Eg4KBm51bWJlchgB",
+            "IAEoCTKgAQoHR3JlZXRlchIyCghTYXlIZWxsbxITLmdyZWV0LkhlbGxvUmVx",
+            "dWVzdBoRLmdyZWV0LkhlbGxvUmVwbHkSLwoHR2V0VGltZRISLmdyZWV0LlRp",
+            "bWVSZXF1ZXN0GhAuZ3JlZXQuVGltZVJlcGx5EjAKCFBsYXlHYW1lEhIuZ3Jl",
+            "ZXQuR2FtZVJlcXVlc3QaEC5ncmVldC5HYW1lUmVwbHlCB6oCBGdSUENiBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -41,8 +41,8 @@ namespace gRPC {
             new pbr::GeneratedClrTypeInfo(typeof(global::gRPC.HelloReply), global::gRPC.HelloReply.Parser, new[]{ "Message" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::gRPC.TimeRequest), global::gRPC.TimeRequest.Parser, new[]{ "Message" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::gRPC.TimeReply), global::gRPC.TimeReply.Parser, new[]{ "Day", "Month", "Year" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::gRPC.GameRequest), global::gRPC.GameRequest.Parser, new[]{ "Message" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::gRPC.GameReply), global::gRPC.GameReply.Parser, new[]{ "Message" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::gRPC.GameRequest), global::gRPC.GameRequest.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::gRPC.GameReply), global::gRPC.GameReply.Parser, new[]{ "Number" }, null, null, null)
           }));
     }
     #endregion
@@ -680,24 +680,12 @@ namespace gRPC {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public GameRequest(GameRequest other) : this() {
-      message_ = other.message_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public GameRequest Clone() {
       return new GameRequest(this);
-    }
-
-    /// <summary>Field number for the "message" field.</summary>
-    public const int MessageFieldNumber = 1;
-    private string message_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Message {
-      get { return message_; }
-      set {
-        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -713,14 +701,12 @@ namespace gRPC {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Message != other.Message) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Message.Length != 0) hash ^= Message.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -734,10 +720,6 @@ namespace gRPC {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Message.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Message);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -746,9 +728,6 @@ namespace gRPC {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Message.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
-      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -759,9 +738,6 @@ namespace gRPC {
     public void MergeFrom(GameRequest other) {
       if (other == null) {
         return;
-      }
-      if (other.Message.Length != 0) {
-        Message = other.Message;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -774,10 +750,6 @@ namespace gRPC {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            Message = input.ReadString();
-            break;
-          }
         }
       }
     }
@@ -809,7 +781,7 @@ namespace gRPC {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public GameReply(GameReply other) : this() {
-      message_ = other.message_;
+      number_ = other.number_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -818,14 +790,14 @@ namespace gRPC {
       return new GameReply(this);
     }
 
-    /// <summary>Field number for the "message" field.</summary>
-    public const int MessageFieldNumber = 1;
-    private string message_ = "";
+    /// <summary>Field number for the "number" field.</summary>
+    public const int NumberFieldNumber = 1;
+    private string number_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Message {
-      get { return message_; }
+    public string Number {
+      get { return number_; }
       set {
-        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        number_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -842,14 +814,14 @@ namespace gRPC {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Message != other.Message) return false;
+      if (Number != other.Number) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (Number.Length != 0) hash ^= Number.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -863,9 +835,9 @@ namespace gRPC {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Message.Length != 0) {
+      if (Number.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(Message);
+        output.WriteString(Number);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -875,8 +847,8 @@ namespace gRPC {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Message.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+      if (Number.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Number);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -889,8 +861,8 @@ namespace gRPC {
       if (other == null) {
         return;
       }
-      if (other.Message.Length != 0) {
-        Message = other.Message;
+      if (other.Number.Length != 0) {
+        Number = other.Number;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -904,7 +876,7 @@ namespace gRPC {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            Message = input.ReadString();
+            Number = input.ReadString();
             break;
           }
         }
